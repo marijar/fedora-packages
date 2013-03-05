@@ -25,6 +25,10 @@ class BugStatsWidget(twc.Widget):
     open_query_string = twc.Variable(default='')
     closed_query_string = twc.Variable(default='')
 
+    resource = 'bugzilla'
+    resource_path = 'query_bugs'
+    release_table = twc.Param()
+
     def prepare(self):
         super(BugStatsWidget, self).prepare()
         def to_query_string(query):
@@ -48,6 +52,31 @@ class BugStatsWidget(twc.Widget):
             "chfieldvalue": "CLOSED",
             "chfieldfrom": datetime.datetime.now().isoformat().split('T')[0],
         })
+
+        releases = []
+        self.filters = {'package': self.package}
+        pkgdb = get_connector('pkgdb')
+        collections = pkgdb.get_collection_table(active_only=True)
+
+        for id, collection in collections.items():
+            name = collection['name']
+            ver = collection['version']
+            label = "%s %s" % (name, ver)
+            value = str(ver)
+            if ver == 'devel':
+                name = 'Rawhide'
+                ver = 9999999
+                label = 'Rawhide'
+                value = 'rawhide'
+
+            if name in ('Fedora', 'Rawhide', 'Fedora EPEL'):
+                releases.append({'label': label, 'value': value, 'version': ver})
+
+        def _sort(a,b):
+            return cmp(int(b['version']), int(a['version']))
+
+        releases.sort(_sort)
+        self.release_table = releases
 
 
 class BugsGrid(Grid):

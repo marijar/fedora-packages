@@ -1392,6 +1392,8 @@ div.karma img {
 
 div.count-summary-dashboard {
   overflow: auto;
+  background: white url('../images/count-box-gradient_dark.png') repeat-x;
+  margin-top: 10px;
 }
 
 .count-box a,
@@ -1399,22 +1401,40 @@ div.count-summary-dashboard {
   text-decoration: none;
 }
 
+div.count-summary-dashboard div.bugs {
+  background-color: white;
+  float: right;
+  margin: 10px 10px 10px 0;
+}
+
+div.count-summary-dashboard div.bugs-divs {
+  background-color: white;
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+
+div.count-summary-dashboard h3 {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 10pt;
+  color: rgb(153, 153, 153);
+  margin-bottom: 0.5em;
+}
+
 div.count-summary-dashboard dl,
 div.count-summary-dashboard div.count-box,
 div.count-summary-dashboard div.action-box {
   text-align: center;
   -moz-border-radius: 6px;
-  margin: 1em 1.5em;
-  margin-left: 0px;
+  margin-left: 2px;
   float: left;
-  padding: 10px;
   max-width: 90px;
   min-height: 110px;
-  background: white url('../images/count-box-gradient_light.png') repeat-x;
+  background: white;
 }
 
 div.count-summary-dashboard div.action-box {
-  background: white url('../images/count-box-gradient_dark.png') repeat-x;
+  background: white;
 }
 
 div.count-summary-dashboard .action-header {
@@ -1426,7 +1446,7 @@ div.count-summary-dashboard dd {
   margin: 0px;
 }
 div.count-summary-dashboard .main-count-value {
-  font-size: 2.4em;
+  font-size: 2.0em;
   font-weight: bold;
   width: 100%;
   text-align: center;
